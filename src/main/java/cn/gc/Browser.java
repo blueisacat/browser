@@ -3,6 +3,10 @@ package cn.gc;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public class Browser {
 
   public Browser() {

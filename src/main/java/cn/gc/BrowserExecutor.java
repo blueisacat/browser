@@ -1,5 +1,9 @@
 package cn.gc;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public class BrowserExecutor {
 
   private static final long DEFAULT_WAIT_IN_MILLISECOND = 1_000L;

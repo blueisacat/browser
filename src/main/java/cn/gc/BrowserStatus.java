@@ -1,5 +1,9 @@
 package cn.gc;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public enum BrowserStatus {
   NOT_USE(0), // 未使用
   IN_USE(1), // 使用中

@@ -8,6 +8,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.Map;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public class PropertiesUtils {
 
 	private PropertiesUtils() {

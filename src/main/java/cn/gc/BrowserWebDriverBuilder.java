@@ -11,6 +11,10 @@ import org.openqa.selenium.firefox.*;
 
 import java.io.File;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public class BrowserWebDriverBuilder {
 
     private static final String TYPE = PropertiesUtils.getInstance().getStringVal("browser.type");

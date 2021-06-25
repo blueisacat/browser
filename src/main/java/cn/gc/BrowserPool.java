@@ -9,6 +9,10 @@ import cn.gc.utils.PropertiesUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public class BrowserPool {
 
   private static BrowserPool browserPool = new BrowserPool();

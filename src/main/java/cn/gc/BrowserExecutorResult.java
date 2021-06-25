@@ -2,6 +2,10 @@ package cn.gc;
 
 import java.io.Serializable;
 
+/**
+ * @author : gc
+ * @date : 2021/6/25
+ */
 public class BrowserExecutorResult implements Serializable {
 
   private static final long serialVersionUID = 1L;

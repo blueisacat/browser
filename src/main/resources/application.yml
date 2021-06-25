@@ -1,0 +1,9 @@
+browser:
+  type: chrome #firefox chrome
+  driver: pathToDriver #浏览器驱动路径
+  binary: pathToBinary #浏览器执行文件路径
+  pool:
+    poolMaxSize: 2 #浏览器池最大值
+    poolInitSize: 1 #浏览器池初始化值
+    testOnBorrow: true  #获取浏览器时是否测试可用性
+    recycleInSecond: 60 #回收浏览器时间间隔

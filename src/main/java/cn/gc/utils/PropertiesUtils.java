@@ -86,12 +86,12 @@ public class PropertiesUtils {
 		Yaml yaml = new Yaml();
 		try {
 			// 读取当前项目同级目录下的配置文件,jar包形式
-			File propertiesFile = new File(System.getProperty("user.dir"), "application.yml");
+			File propertiesFile = new File(System.getProperty("user.dir"), "browser.yml");
 			if (!propertiesFile.exists()) {
 				// 读取source目录下配置文件
-				URL url = PropertiesUtils.class.getClassLoader().getResource("application.yml");
+				URL url = PropertiesUtils.class.getClassLoader().getResource("browser.yml");
 				if (url == null) {
-					throw new RuntimeException("not found application.yml");
+					throw new RuntimeException("not found browser.yml");
 				}
 				propertiesFile = new File(url.getPath());
 			}

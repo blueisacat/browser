@@ -17,6 +17,7 @@ selenium是一款测试工具，使用webDriver操作浏览器进行比较真实
 核心使用selenium-java的3.141.59版本，根据实际使用可以更换对应的selenium版本。
 
 ## 2.2 配置文件
+配置文件browser.yml如下：
 ~~~yaml
 browser:
   type: chrome #firefox chrome

@@ -1,8 +1,8 @@
-package cn.gc;
+package cn.blueisacat;
 
 /**
  * @author : gc
- * @date : 2021/6/25
+ * @date : 2021/4/19
  */
 public enum BrowserStatus {
   NOT_USE(0), // 未使用

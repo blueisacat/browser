@@ -1,6 +1,6 @@
-package cn.gc;
+package cn.blueisacat;
 
-import cn.gc.utils.PropertiesUtils;
+import cn.blueisacat.utils.ConfigUtils;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
@@ -13,13 +13,13 @@ import java.io.File;
 
 /**
  * @author : gc
- * @date : 2021/6/25
+ * @date : 2021/4/19
  */
 public class BrowserWebDriverBuilder {
 
-    private static final String TYPE = PropertiesUtils.getInstance().getStringVal("browser.type");
-    private static final String DRIVER_PATH = PropertiesUtils.getInstance().getStringVal("browser.driver");
-    private static final String BINARY_PATH = PropertiesUtils.getInstance().getStringVal("browser.binary");
+    private static final String TYPE = ConfigUtils.getInstance().getStringVal("browser.type");
+    private static final String DRIVER_PATH = ConfigUtils.getInstance().getStringVal("browser.driver");
+    private static final String BINARY_PATH = ConfigUtils.getInstance().getStringVal("browser.binary");
 
     private boolean headless = true;
     private boolean loadImgResources = false;

@@ -1,11 +1,11 @@
-package cn.gc;
+package cn.blueisacat;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author : gc
- * @date : 2021/6/25
+ * @date : 2021/4/19
  */
 public class Browser {
 

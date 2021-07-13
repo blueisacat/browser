@@ -1,17 +1,17 @@
-package cn.gc;
+package cn.blueisacat;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
-import cn.gc.utils.PropertiesUtils;
+import cn.blueisacat.utils.ConfigUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
  * @author : gc
- * @date : 2021/6/25
+ * @date : 2021/4/19
  */
 public class BrowserPool {
 
@@ -27,19 +27,19 @@ public class BrowserPool {
 
   private void initPool() {
     // 读取配置[池最大值]
-    if (null != PropertiesUtils.getInstance().getIntegerVal("browser.pool.poolMaxSize")) {
-      this.poolMaxSize = PropertiesUtils.getInstance().getIntegerVal("browser.pool.poolMaxSize");
+    if (null != ConfigUtils.getInstance().getIntegerVal("browser.pool.poolMaxSize")) {
+      this.poolMaxSize = ConfigUtils.getInstance().getIntegerVal("browser.pool.poolMaxSize");
     }
     // 读取配置[池初始值]
-    if (null != PropertiesUtils.getInstance().getIntegerVal("browser.pool.poolInitSize")) {
-      this.poolInitSize = PropertiesUtils.getInstance().getIntegerVal("browser.pool.poolInitSize");
+    if (null != ConfigUtils.getInstance().getIntegerVal("browser.pool.poolInitSize")) {
+      this.poolInitSize = ConfigUtils.getInstance().getIntegerVal("browser.pool.poolInitSize");
     }
     // 读取配置[获取浏览器时是否进行验证]
-    if (null != PropertiesUtils.getInstance().getBooleanVal("browser.pool.testOnBorrow")) {
-      this.testOnBorrow = PropertiesUtils.getInstance().getBooleanVal("browser.pool.testOnBorrow");
+    if (null != ConfigUtils.getInstance().getBooleanVal("browser.pool.testOnBorrow")) {
+      this.testOnBorrow = ConfigUtils.getInstance().getBooleanVal("browser.pool.testOnBorrow");
     }
-    if (null != PropertiesUtils.getInstance().getBooleanVal("browser.pool.recycleInSecond")) {
-      this.recycleInSecond = PropertiesUtils.getInstance().getIntegerVal("browser.pool.recycleInSecond");
+    if (null != ConfigUtils.getInstance().getBooleanVal("browser.pool.recycleInSecond")) {
+      this.recycleInSecond = ConfigUtils.getInstance().getIntegerVal("browser.pool.recycleInSecond");
     }
     // 校验poolMaxSize
     if (poolMaxSize <= 0) {

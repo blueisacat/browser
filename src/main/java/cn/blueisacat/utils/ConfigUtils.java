@@ -109,17 +109,25 @@ public class ConfigUtils {
     private void init() {
         Yaml yaml = new Yaml();
         try {
-            // 读取当前项目同级目录下的配置文件,jar包形式
-            File cnofigFile = new File(System.getProperty("user.dir"), "browser.yml");
-            if (!cnofigFile.exists()) {
-                // 读取source目录下配置文件
-                URL url = ConfigUtils.class.getClassLoader().getResource("browser.yml");
-                if (url == null) {
-                    throw new RuntimeException("not found browser.yml");
+            // 读取自定义配置文件
+            File configFile = new File(System.getProperty("browser.config.location", ""));
+            if (!configFile.exists() || configFile.isDirectory()) {
+                // 读取当前项目同级目录下的配置文件
+                configFile = new File(System.getProperty("user.dir", ""), "browser.yml");
+                if (!configFile.exists()) {
+                    // 读取当前项目同级目录下config文件夹下的配置文件
+                    configFile = new File(System.getProperty("user.dir", "") + File.separator + "config", "browser.yml");
+                    if (!configFile.exists()) {
+                        // 读取source目录下配置文件
+                        URL url = ConfigUtils.class.getClassLoader().getResource("browser.yml");
+                        if (url == null) {
+                            throw new RuntimeException("not found browser.yml");
+                        }
+                        configFile = new File(url.getPath());
+                    }
                 }
-                cnofigFile = new File(url.getPath());
             }
-            configMap = yaml.load(FileUtils.openInputStream(cnofigFile));
+            configMap = yaml.load(FileUtils.openInputStream(configFile));
         } catch (Exception e) {
             throw new RuntimeException();
         }

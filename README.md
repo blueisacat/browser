@@ -40,6 +40,12 @@ browser:
 
 考虑到windows及linux下webDriver的通用性，暂时只兼容了firefox及chrome两种主流浏览器，至于phatomJS已经很长时间无人维护，所以也放弃兼容，如有拓展浏览器的需求，请在BrowserWebDriverBuilder.class中进行拓展。
 
+配置文件加载顺序如下：
+1. browser.config.location指定配置文件
+2. 当前目录下的browser.yml
+3. 当前目录下的config文件夹中的browser.yml
+4. jar包内的browser.yml
+
 ## 2.3 使用样例
 使用样例：BrowserExecutor.class中的getPageSource()方法
 ~~~java

@@ -56,49 +56,62 @@ browser:
 3. 当前目录下的config文件夹中的browser.yml
 4. jar包内的browser.yml
 
-## 2.3 使用样例
+## 2.3 使用教程
 
-使用样例：BrowserExecutor.class中的getPageSource()方法
+1. 创建执行器
+2. 构造请求参数
+3. 执行业务方法
+4. 获取执行结果
+
+使用方法1：使用内置FetchPageSourceFunction方法获取页面源代码
 
 ~~~java
-public class BrowserExecutor {
+public class Test {
 
-    //...
-
-    public static BrowserExecutorResult getPageSource(String url, long waitInMillisecond, long timeoutInSecond) {
-        // 从浏览器池中获取浏览器
-        Browser browser = BrowserPool.getInstance().getBrowser();
-        try {
-            // 设置浏览器的访问超时参数
-            browser.setTimeout(validateTimeoutInSecond(timeoutInSecond));
-            // 使用浏览器访问url
-            browser.getWebDriver().get(url);
-            // 等待浏览器响应
-            Thread.sleep(waitInMillisecond);
-            // 获取页面源码
-            String pageSource = browser.getWebDriver().getPageSource();
-            // 获取页面当前url
-            String currentUrl = browser.getWebDriver().getCurrentUrl();
-            // 封装返回结果
-            return BrowserExecutorResult.success(pageSource, currentUrl);
-        } catch (Exception e) {
-            // 销毁浏览器
-            browser.destroy();
-            return BrowserExecutorResult.failure();
-        } finally {
-            // 归还浏览器
-            browser.release();
-        }
+    public static void main(String[] args) {
+        // 创建执行器
+        BrowserExecutor<FetchPageSourceFunction.Request, FetchPageSourceFunction.Response> executor = new BrowserExecutor<FetchPageSourceFunction.Request, FetchPageSourceFunction.Response>();
+        // 构造请求参数
+        FetchPageSourceFunction.Request request = new FetchPageSourceFunction.Request("https://www.baidu.com");
+        // 执行业务方法
+        BrowserExecutorResult<FetchPageSourceFunction.Response> result = executor.execute(new FetchPageSourceFunction(), request);
+        // 获取执行结果
+        System.out.println(result.get().getPageSource());
     }
 
-    //...
+}
+~~~
+
+使用方法2：使用自定义方法执行业务操作
+
+~~~java
+public class Test {
+
+    public static void main(String[] args) {
+        // 创建执行器
+        BrowserExecutor<String, String> executor = new BrowserExecutor<String, String>();
+        // 构造请求参数
+        String url = "http://www.baidu.com";
+        // 执行业务方法
+        BrowserExecutorResult<String> result = executor.execute(new BrowserExecutorFunction<String, String>() {
+            @Override
+            protected BrowserExecutorResult<String> doBusiness(Browser browser, String url) throws Exception {
+                browser.getWebDriver().get(url);
+                Thread.sleep(1_000);
+                String pageSource = browser.getWebDriver().getPageSource();
+                return new BrowserExecutorResult<String>(pageSource);
+            }
+        }, url);
+        // 获取执行结果
+        System.out.println(result.get());
+    }
 
 }
 ~~~
 
 其中selenium以及webDriver的使用请参考“4.参考资料”。
 
-## 2.4 拓展
+## 2.4 自定义浏览器
 
 当前默认支持Chome及Firefox，如有自定义浏览器（修改浏览器配置项、增加其他浏览器支持等）的需求，拓展方法如下：
 

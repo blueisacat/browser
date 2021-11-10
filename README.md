@@ -47,7 +47,7 @@ browser:
 * browser.pool.testOnBorrow：获取浏览器时是否测试可用性，建议开启，保证程序获取的浏览器可用性。
 * browser.pool.recycleInSecond：回收浏览器时间间隔，每次间隔后检测浏览器是否使用，如果已经不再使用，进行回收（销毁）处理，建议60，单位为秒。
 
-考虑到windows及linux下webDriver的通用性，暂时只兼容了firefox及chrome两种主流浏览器，至于phatomJS已经很长时间无人维护，所以也放弃兼容，如有拓展浏览器的需求，请参考“2.4拓展”。
+考虑到windows及linux下webDriver的通用性，暂时只兼容了firefox及chrome两种主流浏览器，至于phatomJS已经很长时间无人维护，所以也放弃兼容，如有自定义浏览器的需求，请参考“2.4自定义浏览器”。
 
 配置文件加载顺序如下：
 

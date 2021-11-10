@@ -14,7 +14,7 @@ selenium是一款测试工具，使用webDriver操作浏览器进行比较真实
 <dependency>
     <groupId>cn.blueisacat</groupId>
     <artifactId>browser</artifactId>
-    <version>2.0</version>
+    <version>3.0</version>
 </dependency>
 
 ~~~

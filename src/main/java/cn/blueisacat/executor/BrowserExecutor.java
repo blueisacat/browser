@@ -2,6 +2,12 @@ package cn.blueisacat.executor;
 
 import cn.blueisacat.browser.Browser;
 import cn.blueisacat.pool.BrowserPool;
+import com.google.common.base.Strings;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : gc
@@ -37,6 +43,45 @@ public class BrowserExecutor {
         } finally {
             browser.release();
         }
+    }
+
+    public static BrowserExecutorResult getPageSourceIncludeIFrame(String url) {
+        return getPageSourceIncludeIFrame(url, DEFAULT_WAIT_IN_MILLISECOND, DEFAULT_TIMEOUT_IN_SECOND);
+    }
+
+    public static BrowserExecutorResult getPageSourceIncludeIFrame(String url, long timeoutInSecond) {
+        return getPageSourceIncludeIFrame(url, DEFAULT_WAIT_IN_MILLISECOND, validateTimeoutInSecond(timeoutInSecond));
+    }
+
+    public static BrowserExecutorResult getPageSourceIncludeIFrame(String url, long waitInMillisecond, long timeoutInSecond) {
+        Browser browser = BrowserPool.getInstance().getBrowser();
+        browser.setTimeout(validateTimeoutInSecond(timeoutInSecond));
+        browser.getWebDriver().get(url);
+        try {
+            browser.setTimeout(validateTimeoutInSecond(timeoutInSecond));
+            browser.getWebDriver().get(url);
+            Thread.sleep(waitInMillisecond);
+            String pageSource = browser.getWebDriver().getPageSource();
+            String currentUrl = browser.getWebDriver().getCurrentUrl();
+            List<String> iframePageSources = browser.getWebDriver().findElements(By.cssSelector("iframe")).stream().map(iframe -> {
+                String iframePageSource = null;
+                try {
+                    WebDriver webDriver = browser.getWebDriver().switchTo().frame(iframe);
+                    Thread.sleep(waitInMillisecond);
+                    iframePageSource = webDriver.getPageSource();
+                    browser.getWebDriver().switchTo().defaultContent();
+                } catch (Exception e) {
+                }
+                return iframePageSource;
+            }).filter(iframePageSource -> !Strings.isNullOrEmpty(iframePageSource)).collect(Collectors.toList());
+            return BrowserExecutorResult.success(pageSource, currentUrl, iframePageSources);
+        } catch (Exception e) {
+            browser.destroy();
+            return BrowserExecutorResult.failure();
+        } finally {
+            browser.release();
+        }
+
     }
 
     private static long validateTimeoutInSecond(long timeoutInSecond) {

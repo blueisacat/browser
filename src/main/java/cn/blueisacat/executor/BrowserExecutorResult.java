@@ -1,6 +1,9 @@
 package cn.blueisacat.executor;
 
+import com.google.common.collect.Lists;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author : gc
@@ -17,6 +20,8 @@ public class BrowserExecutorResult implements Serializable {
     private String pageSource;
 
     private String msg;
+
+    private List<String> iframePageSources = Lists.newArrayList();
 
     private BrowserExecutorResult() {
     }
@@ -53,6 +58,14 @@ public class BrowserExecutorResult implements Serializable {
         this.msg = msg;
     }
 
+    public List<String> getIframePageSources() {
+        return iframePageSources;
+    }
+
+    public void setIframePageSources(List<String> iframePageSources) {
+        this.iframePageSources = iframePageSources;
+    }
+
     public boolean isSuccess() {
         if (null != this.code) {
             return this.code == BrowserExecutorResultCode.SUCCESS ? true : false;
@@ -69,6 +82,16 @@ public class BrowserExecutorResult implements Serializable {
         }
     }
 
+    public static BrowserExecutorResult success(String msg, String pageSource, String currentUrl, List<String> iframePageSources) {
+        BrowserExecutorResult browserExecutorResult = new BrowserExecutorResult();
+        browserExecutorResult.setCode(BrowserExecutorResultCode.SUCCESS);
+        browserExecutorResult.setMsg(msg);
+        browserExecutorResult.setPageSource(pageSource);
+        browserExecutorResult.setCurrentUrl(currentUrl);
+        browserExecutorResult.setIframePageSources(iframePageSources);
+        return browserExecutorResult;
+    }
+
     public static BrowserExecutorResult success(String msg, String pageSource, String currentUrl) {
         BrowserExecutorResult browserExecutorResult = new BrowserExecutorResult();
         browserExecutorResult.setCode(BrowserExecutorResultCode.SUCCESS);
@@ -80,6 +103,10 @@ public class BrowserExecutorResult implements Serializable {
 
     public static BrowserExecutorResult success(String pageSource, String currentUrl) {
         return success("", pageSource, currentUrl);
+    }
+
+    public static BrowserExecutorResult success(String pageSource, String currentUrl, List<String> iframePageSources) {
+        return success("", pageSource, currentUrl, iframePageSources);
     }
 
     public static BrowserExecutorResult failure(String msg) {

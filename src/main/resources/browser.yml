@@ -1,5 +1,5 @@
 browser:
-  type: chrome #firefox chrome
+  id: firefox
   driver: pathToDriver #浏览器驱动路径
   binary: pathToBinary #浏览器执行文件路径
   pool:

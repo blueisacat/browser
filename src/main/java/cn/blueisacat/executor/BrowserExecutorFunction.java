@@ -16,6 +16,7 @@ public abstract class BrowserExecutorFunction<IN, OUT> {
             return doBusiness(browser, in);
         } catch (Exception e) {
             browser.destroy();
+            e.printStackTrace();
             return new BrowserExecutorResult<OUT>();
         } finally {
             browser.release();

@@ -29,6 +29,8 @@ browser:
   id: chrome #firefox chrome
   driver: pathToDriver #浏览器驱动路径
   binary: pathToBinary #浏览器执行文件路径
+  headless: true #浏览器无头模式
+  loadImgResources: true #浏览器无图模式
   pool:
     poolMaxSize: 2 #浏览器池最大值
     poolInitSize: 1 #浏览器池初始化值

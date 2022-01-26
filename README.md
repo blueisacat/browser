@@ -29,8 +29,8 @@ browser:
   id: chrome #firefox chrome
   driver: pathToDriver #浏览器驱动路径
   binary: pathToBinary #浏览器执行文件路径
-  headless: true #浏览器无头模式
-  loadImgResources: true #浏览器无图模式
+  headless: true #浏览器是否开启无头模式
+  loadImgResources: true #浏览器是否加载图片
   pool:
     poolMaxSize: 2 #浏览器池最大值
     poolInitSize: 1 #浏览器池初始化值
@@ -43,6 +43,8 @@ browser:
 * browser.id：浏览器类型，目前只支持选择其中一种浏览器进行使用，可选值[firefox，chrome]。
 * browser.driver：浏览器驱动路径，驱动版本需要与浏览器版本对应，下载地址参考“3.资源下载”
 * browser.binary：浏览器执执行文件路径，浏览器版本需要与驱动版本对应。
+* browser.headless：浏览器是否开启无头模式，开启无头模式可以节省资源。
+* browser.loadImgResources：浏览器是否加载图片，关闭后可节省带宽。
 * browser.pool.poolMaxSize：浏览器池最大值，由于浏览器消耗CPU资源大，建议最大值不超过CPU的逻辑核数。
 * browser.pool.poolInitSize：浏览器池初始化值，建议初始化值为0，随用随开，节省资源。
 * browser.pool.testOnBorrow：获取浏览器时是否测试可用性，建议开启，保证程序获取的浏览器可用性。
